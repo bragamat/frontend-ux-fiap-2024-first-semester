@@ -23,7 +23,8 @@ COPY package*.json ./
 COPY . .
 
 # Install dependencies
-RUN npm install && \
+RUN npm install -g npm && \
+  npm install && \
   npm run build
 
 # Use Nginx as the production server
