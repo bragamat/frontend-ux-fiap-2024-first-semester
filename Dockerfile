@@ -19,8 +19,14 @@ WORKDIR /app
 # Copy package.json and package-lock.json to the working directory
 COPY package.json ./
 COPY yarn.lock ./
-COPY . .
-RUN NODE_ENV=production yarn && yarn build
+# Install dependencies
+RUN NODE_ENV=production yarn
+
+# Copy the entire application code to the container
+COPY vite.config.js ./
+
+RUN yarn global add vite @vitejs/plugin-react && ln -s /usr/local/lib/node_modules/ ../node_modules
+RUN  NODE_ENV=production yarn run build
 
 # Use Nginx as the production server
 FROM nginx:alpine
