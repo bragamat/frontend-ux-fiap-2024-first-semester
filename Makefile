@@ -1,21 +1,21 @@
 .DEFAULT_GOAL := dev
 
 build:
-	@npm run build
+	@yarn build
 .PHONY: build
 
 deps:
-	@npm i
+	@yarn
 .PHONY: deps
 
 dev: deps
-	@npm run dev
+	@yarn dev
 .PHONY: dev
 
 lint:
-	@npm run lint
+	@yarn lint
 .PHONY: lint
 
 lint.fix:
-	@npm run lint -- --fix
+	@yarn lint -- --fix
 .PHONY: lint.fix
