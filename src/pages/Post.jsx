@@ -1,40 +1,41 @@
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
 import {
-	useParams,
-	Link
+  useParams,
+  Link
 } from 'react-router-dom'
 
 import { Layout } from '../components/Layout'
 import { useFetchPostBySlug } from '../hooks/useFetchPostBySlug'
 
 export const Post = () => {
-	const { slug } = useParams()
+  const { slug } = useParams()
 
-	const { data: post, isLoading } = useFetchPostBySlug({ slug })
+  const { data: post, isLoading } = useFetchPostBySlug({ slug })
 
-	return (
-		<Layout>
-			{
-				post ? (
-					<div className="container">
-						<div className="row">
-							<div className="col-12">
-								<h1 className="my-3">{post?.fields?.title}</h1>
-							</div>
+  return (
+    <Layout>
 
-							<div dangerouslySetInnerHTML={{ __html: documentToHtmlString(post.fields.body) }}></div>
+      {isLoading ? (<div>Carregando...</div>) : null}
+      {
+        post ? (
+          <div className="container">
+            <div className="row">
+              <div className="col-12">
+                <h1 className="my-3">{post?.fields?.title}</h1>
+              </div>
 
-							<div className="mt-1">
-								<Link to="/" className="btn btn-primary">
+              <div dangerouslySetInnerHTML={{ __html: documentToHtmlString(post.fields.body) }}></div>
+
+              <div className="mt-1">
+                <Link to="/" className="btn btn-primary">
                   Voltar para Home
-								</Link>
-							</div>
-						</div>
-					</div>
-				) : null
-			}
+                </Link>
+              </div>
+            </div>
+          </div>
+        ) : null
+      }
 
-			{isLoading ? (<div>Carregando...</div>) : null}
-		</Layout>
-	)
+    </Layout>
+  )
 }

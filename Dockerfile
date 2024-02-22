@@ -18,14 +18,12 @@ WORKDIR /app
 
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
-RUN npm install
 
 # Copy the entire application code to the container
 COPY . .
 
 # Install dependencies
-RUN npm i -g vite && \
-  ln -s /usr/local/lib/node_modules/ ../node_modules && \
+RUN npm install && \
   npm run build
 
 # Use Nginx as the production server
