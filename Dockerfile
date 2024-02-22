@@ -24,7 +24,9 @@ RUN npm install
 COPY . .
 
 # Install dependencies
-RUN  npm i -g vite && npm run build
+RUN  npm i -g vite && \
+  ln -s /usr/local/lib/node_modules/ ../node_modules && \
+  npm run build
 
 # Use Nginx as the production server
 FROM nginx:alpine
