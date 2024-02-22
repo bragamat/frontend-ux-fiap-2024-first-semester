@@ -19,12 +19,8 @@ WORKDIR /app
 # Copy package.json and package-lock.json to the working directory
 COPY package.json ./
 COPY yarn.lock ./
-RUN NODE_ENV=production yarn
-
-# Copy the entire application code to the container
 COPY . .
-
-RUN NODE_ENV=production yarn build
+RUN NODE_ENV=production yarn && yarn build
 
 # Use Nginx as the production server
 FROM nginx:alpine
