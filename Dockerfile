@@ -17,14 +17,14 @@ ENV VITE_CONTENTFUL_ENTRY=$VITE_CONTENTFUL_ENTRY
 WORKDIR /app
 
 # Copy package.json and package-lock.json to the working directory
-COPY package*.json ./
-RUN npm install -g npm && npm install
+COPY package.json ./
+COPY yarn.lock ./
+RUN NODE_ENV=production yarn
 
 # Copy the entire application code to the container
 COPY . .
 
-# Install dependencies
-RUN npm run build
+RUN NODE_ENV=production yarn build
 
 # Use Nginx as the production server
 FROM nginx:alpine
