@@ -18,14 +18,13 @@ WORKDIR /app
 
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
+RUN npm install -g npm && npm install
 
 # Copy the entire application code to the container
 COPY . .
 
 # Install dependencies
-RUN npm install -g npm && \
-  npm install && \
-  npm run build
+RUN npm run build
 
 # Use Nginx as the production server
 FROM nginx:alpine
