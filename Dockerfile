@@ -17,14 +17,14 @@ ENV VITE_CONTENTFUL_ENTRY=$VITE_CONTENTFUL_ENTRY
 WORKDIR /app
 
 # Copy package.json and package-lock.json to the working directory
-COPY package.json ./
-COPY package-lock.json ./
+COPY package*.json ./
+RUN npm install
 
 # Copy the entire application code to the container
 COPY . .
 
 # Install dependencies
-RUN npm install && npm install vite && npm run build
+RUN  npm i -g vite && npm run build
 
 # Use Nginx as the production server
 FROM nginx:alpine
