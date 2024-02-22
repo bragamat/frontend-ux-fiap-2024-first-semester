@@ -18,13 +18,13 @@ WORKDIR /app
 
 # Copy package.json and package-lock.json to the working directory
 COPY package.json ./
-COPY package-lock ./
+COPY package-lock.json ./
 
 # Copy the entire application code to the container
 COPY . .
 
 # Install dependencies
-RUN npm i && npm build
+RUN npm install && npm install vite && npm run build
 
 # Use Nginx as the production server
 FROM nginx:alpine
