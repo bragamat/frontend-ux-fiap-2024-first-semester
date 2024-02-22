@@ -16,6 +16,7 @@ export function useFetchPosts({ order, limit, skip } = { skip: '0', order: 'sys.
 	const fetchData = useCallback((pageNumber) => {
 		client
 			.getEntries({
+				content_type: 'post',
 				limit: pagination.limit,
 				order: pagination.order,
 				skip: pageNumber ? (pageNumber * pagination.limit) : pagination.skip,
