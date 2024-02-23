@@ -24,6 +24,7 @@ RUN NODE_ENV=production yarn
 
 # Copy the entire application code to the container
 COPY vite.config.js ./
+COPY index.html ./
 
 RUN NODE_ENV=production yarn run build
 
