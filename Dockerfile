@@ -25,8 +25,7 @@ RUN NODE_ENV=production yarn
 # Copy the entire application code to the container
 COPY vite.config.js ./
 
-RUN yarn global add vite @vitejs/plugin-react && ln -s /usr/local/lib/node_modules/ ../node_modules
-RUN  NODE_ENV=production yarn run build
+RUN NODE_ENV=production yarn run build
 
 # Use Nginx as the production server
 FROM nginx:alpine
